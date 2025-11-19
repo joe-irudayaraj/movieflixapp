@@ -2,6 +2,9 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
 
+The project is a movieflix application that lists the posters and the summary of the movie 
+inspired from sample_mflix mongodb dataset. The backend is hosted as a spring boot application.
+
 ## Development server
 
 To start a local development server, run:
@@ -35,6 +38,10 @@ ng build
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+## Movies Screenshot
+
+![MoviePoster.png](MoviePoster.png)
 
 ## Running unit tests
 

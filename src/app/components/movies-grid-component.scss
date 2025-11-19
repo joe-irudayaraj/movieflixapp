@@ -1,0 +1,115 @@
+.hdr {
+  position: sticky;
+  top: 0;
+  background: #111;
+  color: #fff;
+  padding: .75rem 1rem;
+}
+
+.hint {
+  margin: .25rem 0 0;
+  color: #aaa;
+}
+
+.wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px; /* left grows, right fixed */
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+}
+
+.left {
+  min-width: 0;
+}
+
+.right {
+  position: sticky;
+  top: .75rem;
+  align-self: start;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  margin: .25rem 0 .75rem;
+}
+
+.pager.bottom {
+  margin: .75rem 0 0;
+}
+
+.pager .prev, .pager .next {
+  padding: .5rem .75rem;
+  border: 1px solid #3333;
+  background: #0000;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.pager .prev[disabled], .pager .next[disabled] {
+  opacity: .5;
+  cursor: default;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid #3333;
+  border-radius: 10px;
+  padding: .5rem;
+}
+
+.poster-btn {
+  all: unset;
+  display: block;
+  cursor: pointer;
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #222;
+  /* Smooth fade-in for images when they finish loading */
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+/* Applied by CacheImgDirective when the image is fully loaded */
+.card img.loaded {
+  opacity: 1;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .card img { transition: none; }
+}
+
+h3 {
+  margin: .5rem 0 .25rem;
+  font-size: 1rem;
+}
+
+.sub {
+  color: #777;
+  margin: 0;
+}
+
+.rate {
+  font-weight: 600;
+  margin: .25rem 0 0;
+}
+
+.loading {
+  color: #666;
+  text-align: center;
+}

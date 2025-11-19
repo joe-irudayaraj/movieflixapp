@@ -1,0 +1,49 @@
+<header class="hdr">
+  <h1>🎬 Movies</h1>
+  <p class="hint">Click a poster to view details on the right</p>
+</header>
+
+<!-- Split layout -->
+<main class="wrap">
+  <!-- LEFT View: grid with pager -->
+  <section class="left">
+    <nav class="pager">
+      <button class="prev" (click)="first()" [disabled]="pageIndex() === 0">⏮ First</button>
+      <button class="prev" (click)="prev()" [disabled]="pageIndex() === 0">◀ Prev</button>
+      <span>Page {{ pageIndex() + 1 }} / {{ totalPages() }}</span>
+      <button class="next" (click)="next()" [disabled]="pageIndex() + 1 >= totalPages()">Next ▶</button>
+      <button class="next" (click)="last()" [disabled]="pageIndex() + 1 >= totalPages()">Last ⏭</button>
+    </nav>
+    @if (!loading()) {
+      <section class="grid">
+        @for (m of items(); track m.id) {
+          <article class="card">
+            <a
+              [routerLink]="['/', { outlets: { details: ['movie', m.id] } }]"
+              [skipLocationChange]="true"
+              class="poster-btn"
+              title="Show details">
+              <img [appCacheImg]="posterSrc(m.poster)" [alt]="m.title">
+            </a>
+            <h3>{{ m.title }}</h3>
+            <p class="sub">{{ m.year }} • {{ (m.genres || []).slice(0, 3).join(', ') }}</p>
+            <p class="rate">⭐ {{ m.imdb?.rating ?? '–' }}</p>
+          </article>
+        }
+      </section>
+      <nav class="pager bottom">
+        <button class="prev" (click)="first()" [disabled]="pageIndex() === 0">⏮ First</button>
+        <button class="prev" (click)="prev()" [disabled]="pageIndex() === 0">◀ Prev</button>
+        <span>Page {{ pageIndex() + 1 }} / {{ totalPages() }}</span>
+        <button class="next" (click)="next()" [disabled]="pageIndex() + 1 >= totalPages()">Next ▶</button>
+        <button class="next" (click)="last()" [disabled]="pageIndex() + 1 >= totalPages()">Last ⏭</button>
+      </nav>
+    } @else {
+      <p class="loading">Loading…</p>
+    }
+  </section>
+  <aside class="right">
+     <router-outlet name="details"></router-outlet>
+  </aside>
+</main>
+

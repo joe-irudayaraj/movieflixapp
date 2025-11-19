@@ -1,0 +1,38 @@
+<!-- movie-details.component.html -->
+<ng-container *ngIf="movie$ | async as m; else placeholder">
+  <section class="panel">
+    <header class="panel-hdr">
+      <h2>{{ m.title }}</h2>
+      <a
+        [routerLink]="['/', { outlets: { details: null } }]"
+        [skipLocationChange]="true"
+        class="close"
+        title="Close"
+      >✕</a>
+    </header>
+
+
+    <ul class="facts">
+      <li><strong>Year:</strong> {{ m.year ?? '—' }}</li>
+      <li><strong>Genres:</strong> {{ (m.genres || []).join(', ') || '—' }}</li>
+      <li><strong>IMDb:</strong> {{ m.imdb?.rating ?? '—' }}</li>
+      <li *ngIf="m.runtime"><strong>Runtime:</strong> {{ m.runtime }} min</li>
+    </ul>
+
+    <article class="section" *ngIf="m.plot">
+      <h3>Plot</h3>
+      <p class="plot">{{ m.plot }}</p>
+    </article>
+
+    <article class="section" *ngIf="m.cast?.length">
+      <h3>Cast</h3>
+      <p>{{ m.cast.join(', ') }}</p>
+    </article>
+  </section>
+</ng-container>
+
+<ng-template #placeholder>
+  <section class="placeholder">
+    <p>Select a movie from the left to see details here.</p>
+  </section>
+</ng-template>
